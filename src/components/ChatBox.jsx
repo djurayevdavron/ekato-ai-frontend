@@ -1,4 +1,5 @@
 import Message from "./Message";
+import { useTranslation } from "react-i18next";
 
 function ChatBox({
   messages,
@@ -6,6 +7,7 @@ function ChatBox({
   bottomRef,
   darkMode,
 }) {
+  const { t } = useTranslation();
   return (
     <div
       className={`
@@ -58,7 +60,7 @@ function ChatBox({
               }
             `}
           >
-            Εκατό is typing...
+            {t("typing")}
           </div>
 
         </div>

@@ -1,0 +1,18 @@
+{
+  "light": "Yorug'",
+  "dark": "Tungi",
+  "clear": "Tozalash",
+  "send": "Yuborish",
+  "placeholder": "Xabar yozing...",
+  "preview": "Ko'rish",
+  "hide": "Yashirish",
+  "livePreview": "Jonli ko'rinish",
+  "chatCleared": "Chat tozalandi",
+  "serverError": "Server xatosi",
+  "failedToLoadMessages": "Xabarlarni yuklab bo'lmadi",
+  "copy": "Nusxalash",
+  "copied": "Nusxalandi",
+  "typing": "Εκατό yozmoqda...",
+  "fullscreen": "To'liq ekran",
+  "close": "Yopish"
+}

@@ -1,0 +1,18 @@
+{
+  "light": "Light",
+  "dark": "Dark",
+  "clear": "Clear",
+  "send": "Send",
+  "placeholder": "Type a message...",
+  "preview": "Preview",
+  "hide": "Hide",
+  "livePreview": "Live Preview",
+  "chatCleared": "Chat cleared",
+  "serverError": "Server error",
+  "failedToLoadMessages": "Failed to load messages",
+  "copy": "Copy",
+  "copied": "Copied",
+  "typing": "Εκατό is typing...",
+  "fullscreen": "Fullscreen",
+  "close": "Close"
+}

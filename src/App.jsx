@@ -3,11 +3,14 @@ import API from "./services/api";
 import ChatBox from "./components/ChatBox";
 import ChatInput from "./components/ChatInput";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import i18n from "./i18n";
 
 function App() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
   // THEME STATE
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme =
@@ -58,13 +61,13 @@ function App() {
         console.log(error);
 
         toast.error(
-          "Failed to load messages"
+          t("failedToLoadMessages")
         );
       }
     };
 
     loadMessages();
-  }, []);
+  }, [t]);
 
   // CLEAR CHAT
   const clearChat = async () => {
@@ -73,12 +76,16 @@ function App() {
 
       setMessages([]);
 
-      toast.success("Chat cleared");
+      toast.success(
+  t("chatCleared")
+);
 
     } catch (error) {
       console.log(error);
 
-      toast.error("Server error");
+      toast.error(
+  t("serverError")
+);
     }
   };
   // SEND MESSAGE
@@ -109,12 +116,14 @@ function App() {
       ]);
     } catch (error) {
       console.log(error);
-      toast.error("Server error");
+      toast.error(
+  t("serverError")
+);
       setMessages((prev) => [
         ...prev,
         {
           role: "ai",
-          text: "Server error",
+          text: t("serverError"),
         },
       ]);
     }
@@ -164,28 +173,40 @@ function App() {
       >
         {/* HEADER */}
         <div
-          className={`
-            p-4
-            sm:p-5
-            border-b
-            flex
-            items-center
-            justify-between
-            transition-all
-            duration-300
-            ${
-              darkMode
-                ? `
-                  bg-[#020617]
-                  border-cyan-950
-                `
-                : `
-                  bg-gray-100
-                  border-gray-300
-                `
-            }
-          `}
-        >
+  className={`
+    p-4
+    sm:p-5
+
+    border-b
+
+    flex
+    flex-col
+    sm:flex-row
+
+    gap-3
+    sm:gap-0
+
+    items-center
+    sm:items-center
+
+    justify-between
+
+    transition-all
+    duration-300
+
+    ${
+      darkMode
+        ? `
+          bg-[#020617]
+          border-cyan-950
+        `
+        : `
+          bg-gray-100
+          border-gray-300
+        `
+    }
+  `}
+>
 
           {/* LOGO */}
           <h1
@@ -193,7 +214,7 @@ function App() {
               text-2xl
               sm:text-3xl
               font-bold
-              tracking-widest
+              tracking-wide
               drop-shadow-lg
 
               ${
@@ -206,17 +227,35 @@ function App() {
             Εκατό
           </h1>
           {/* BUTTONS */}
-          <div className="flex items-center gap-3">
+          <div
+  className="
+    flex
+    items-center
+    justify-center
+    sm:justify-end
+
+    gap-2
+    sm:gap-3
+
+    flex-wrap
+
+    w-full
+    sm:w-auto
+  "
+>
             {/* THEME BUTTON */}
             <button
               onClick={() =>
                 setDarkMode(!darkMode)
               }
               className={`
-                px-4
+                px-3
+                sm:px-4
                 py-2
                 rounded-xl
-                text-sm
+                text-xs
+                sm:text-sm
+                font-medium
                 transition
                 cursor-pointer
                 ${
@@ -237,17 +276,21 @@ function App() {
                 }
               `}
             >
-              {darkMode ? "Light" : "Dark"}
+              {darkMode
+                ? t("light")
+                : t("dark")}
             </button>
 
             {/* CLEAR BUTTON */}
             <button
               onClick={clearChat}
               className={`
-                px-4
+                px-3
+                sm:px-4
                 py-2
                 rounded-xl
-                text-sm
+                text-xs
+                sm:text-sm
                 font-medium
                 transition
                 cursor-pointer
@@ -269,8 +312,62 @@ function App() {
                 }
               `}
             >
-              Clear
+              {t("clear")}
             </button>
+            <select
+  defaultValue={
+    localStorage.getItem("language") ||
+    "en"
+  }
+  onChange={(e) => {
+    i18n.changeLanguage(
+      e.target.value
+    );
+
+    localStorage.setItem(
+      "language",
+      e.target.value
+    );
+  }}
+  className={`
+    px-2
+    sm:px-3
+    py-2
+
+    rounded-xl
+    text-xs
+    sm:text-sm
+
+    outline-none
+    cursor-pointer
+
+    ${
+      darkMode
+        ? `
+          bg-[#1e293b]
+          text-white
+          border border-cyan-900
+        `
+        : `
+          bg-gray-200
+          text-black
+          border border-gray-400
+        `
+    }
+  `}
+>
+  <option value="uz">
+    UZ
+  </option>
+
+  <option value="en">
+    EN
+  </option>
+
+  <option value="ru">
+    RU
+  </option>
+</select>
 
           </div>
         </div>
